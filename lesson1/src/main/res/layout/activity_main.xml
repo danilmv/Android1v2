@@ -19,14 +19,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/teal_200">
+        android:background="@color/teal_700">
 
         <EditText
             android:id="@+id/editNumber1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:inputType="number"
+            android:layout_weight="1"
             android:hint="number1"
             android:gravity="right"/>
 
@@ -49,6 +49,7 @@
             android:hint="number2"
             android:gravity="left"/>
         <Button
+            android:id="@+id/buttonResult"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:text="="/>
@@ -56,7 +57,8 @@
             android:id="@+id/textResult"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:gravity="center"/>
 
     </LinearLayout>
 
