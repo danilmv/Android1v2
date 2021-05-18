@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <include layout="@layout/calculator_grid" />
+        <include layout="@layout/calculator_constraint" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
