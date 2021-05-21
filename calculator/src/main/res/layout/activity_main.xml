@@ -6,9 +6,9 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
-        android:layout_height="900dp"
-        app:srcCompat="@drawable/desk"
-        android:scaleType="center"/>
+        android:layout_height="match_parent"
+        android:scaleType="center"
+        app:srcCompat="@drawable/desk"/>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,41 +24,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <include layout="@layout/calculator_linear" />
+            <include layout="@layout/calculator_grid" />
         </FrameLayout>
-
-        <RadioGroup
-            android:id="@+id/radio_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <RadioButton
-                android:id="@+id/radio_linear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Linear" />
-
-            <RadioButton
-                android:id="@+id/radio_table"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Table" />
-
-            <RadioButton
-                android:id="@+id/radio_grid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Grid" />
-
-            <RadioButton
-                android:id="@+id/radio_constraint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Constraint" />
-        </RadioGroup>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
