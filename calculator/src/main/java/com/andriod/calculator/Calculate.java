@@ -51,12 +51,13 @@ public class Calculate implements Serializable {
                 textView.setText("");
                 hasDecimal = false;
                 length = 0;
-                if (operatorPressed)
-                    if (newNumber)
+                if (operatorPressed) {
+                    if (newNumber) {
                         lastOperator = null;
-                    else
+                    } else {
                         newNumber = true;
-                else {
+                    }
+                } else {
                     newNumber = true;
                     lastOperator = null;
                 }
@@ -68,19 +69,18 @@ public class Calculate implements Serializable {
             case SUBTRACT:
             case MULTIPLY:
             case DIVIDE:
-                if (operatorPressed && !newNumber)
+                if (!newNumber)
                     showCalculation();
 
+                operatorPressed = true;
                 lastOperator = action;
                 prevValue = firstValue = getInputValue();
                 secondValue = 0;
-                operatorPressed = true;
                 newNumber = true;
 
                 break;
 
             case EQUAL:
-                operatorPressed = false;
                 newNumber = true;
 
                 showCalculation();
@@ -130,6 +130,8 @@ public class Calculate implements Serializable {
         }
         if (secondValue == 0)
             secondValue = getInputValue();
+
+        operatorPressed = false;
 
         prevValue = firstValue;
         switch (lastOperator) {
