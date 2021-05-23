@@ -98,8 +98,10 @@ public class Calculate implements Serializable {
                     break;
 
             case DECIMAL:
-                if (hasDecimal && !newNumber) break;
-                hasDecimal = true;
+                if (action == Action.DECIMAL) {
+                    if (hasDecimal && !newNumber) break;
+                    hasDecimal = true;
+                }
 
             default:
                 if (newNumber) {
