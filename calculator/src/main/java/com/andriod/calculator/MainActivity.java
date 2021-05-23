@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null)
-            calculate = new Calculate(findViewById(R.id.text_output));
+            calculate = new Calculate(findViewById(R.id.text_output), findViewById(R.id.text_output_operation));
+        else
+            restoreCalculate(savedInstanceState);
 
         Button button;
         for (int i = 0; i < buttonIds.length; i++) {
@@ -55,10 +60,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        calculate = (Calculate) savedInstanceState.getSerializable(KEY);
-        calculate.setTextView(findViewById(R.id.text_output));
-        calculate.show();
+        restoreCalculate(savedInstanceState);
 
         super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    private void restoreCalculate(@NonNull Bundle savedInstanceState) {
+        calculate = (Calculate) savedInstanceState.getSerializable(KEY);
+        calculate.setTextView(findViewById(R.id.text_output), findViewById(R.id.text_output_operation));
+        calculate.show();
     }
 }

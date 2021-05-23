@@ -7,23 +7,31 @@ import java.util.Locale;
 
 public class Calculate implements Serializable {
 
+    private static final double MIN_FLOOR = 0.00001;
+
     private transient TextView textView;
+    private transient TextView textViewOperation;
 
     private int length;
     private boolean hasDecimal = false;
     private boolean operatorPressed = false;
     private Action lastOperator;
-    private double value = 0;
+    private double firstValue = 0;
+    private double secondValue = 0;
     private double prevValue = 0;
 
     private boolean newNumber = true;
 
-    public Calculate(TextView textView) {
+    public Calculate(TextView textView, TextView textViewOperation) {
         this.textView = textView;
+        this.textViewOperation = textViewOperation;
     }
 
-    public void setTextView(TextView textView){
+    public void setTextView(TextView textView, TextView textViewOperation) {
         this.textView = textView;
+        this.textViewOperation = textViewOperation;
+
+        showOperation();
     }
 
     public void process(Action action) {
@@ -33,45 +41,62 @@ public class Calculate implements Serializable {
 
         switch (action) {
             case CANCEL:
-                clear();
+                textView.setText("");
+                hasDecimal = false;
+                length = 0;
+                if (operatorPressed)
+                    if (newNumber)
+                        lastOperator = null;
+                    else
+                        newNumber = true;
+                else {
+                    newNumber = true;
+                    lastOperator = null;
+                }
+                showOperation();
 
-                lastOperator = null;
-                return;
+                break;
 
             case ADD:
             case SUBTRACT:
             case MULTIPLY:
             case DIVIDE:
-                if (operatorPressed)
+                if (operatorPressed && !newNumber)
                     showCalculation();
-                value = getInputValue();
+
+                lastOperator = action;
+                prevValue = firstValue = getInputValue();
+                secondValue = 0;
                 operatorPressed = true;
                 newNumber = true;
-                lastOperator = action;
-                prevValue = 0;
+
                 break;
 
             case EQUAL:
-                if (prevValue == 0)
-                    prevValue = getInputValue();
-                showCalculation();
                 operatorPressed = false;
                 newNumber = true;
+
+                showCalculation();
                 break;
 
             case PERCENT:
                 break;
+
             case SIGN:
+                setNegative();
                 break;
 
+            case ZERO:
+                if (newNumber)
+                    break;
+
             case DECIMAL:
-                if (hasDecimal) return;
+                if (hasDecimal && !newNumber) break;
                 hasDecimal = true;
 
             default:
                 if (newNumber) {
-                    value = getInputValue();
-                    clear();
+                    length = 1;
                     textView.setText(action.getValue());
                     newNumber = false;
                     if (!operatorPressed)
@@ -81,12 +106,8 @@ public class Calculate implements Serializable {
                     textView.append(action.getValue());
                 }
         }
-    }
 
-    private void clear() {
-        textView.setText("");
-        hasDecimal = false;
-        length = 0;
+        showOperation();
     }
 
     private double getInputValue() {
@@ -96,28 +117,64 @@ public class Calculate implements Serializable {
     }
 
     private void showCalculation() {
-        if (lastOperator == null) return;
+        if (lastOperator == null) {
+            showOperation();
+            return;
+        }
+        if (secondValue == 0)
+            secondValue = getInputValue();
+
+        prevValue = firstValue;
         switch (lastOperator) {
             case ADD:
-                value += prevValue;
+                firstValue += secondValue;
                 break;
             case SUBTRACT:
-                value -= prevValue;
+                firstValue -= secondValue;
                 break;
             case MULTIPLY:
-                value *= prevValue;
+                firstValue *= secondValue;
                 break;
             case DIVIDE:
-                value /= prevValue;
+                firstValue /= secondValue;
                 break;
         }
-
-
-        clear();
-        textView.setText(String.format(Locale.getDefault(), "%.5f", value));
+        showNumber(firstValue);
     }
 
-    public void show(){
-        textView.setText(String.format(Locale.getDefault(), "%.5f", value));
+    private void setNegative() {
+        showNumber(getInputValue() * -1);
+    }
+
+    private String formatNumber(double number) {
+
+        if (number - Math.floor(number) < MIN_FLOOR)
+            return String.format(Locale.getDefault(), "%.0f", number);
+        else
+            return String.format(Locale.getDefault(), "%s", number);
+    }
+
+    private void showNumber(double number) {
+        textView.setText(formatNumber(number));
+    }
+
+    private String showOperation() {
+        String operation;
+        if (lastOperator != null)
+            if (operatorPressed)
+                operation = String.format(Locale.getDefault(), "%s %s",
+                        formatNumber(prevValue), lastOperator.getValue());
+            else
+                operation = String.format(Locale.getDefault(), "%s %s %s = ",
+                        formatNumber(prevValue), lastOperator.getValue(), formatNumber(secondValue));
+        else
+            operation = "";
+
+        textViewOperation.setText(operation);
+        return operation;
+    }
+
+    public void show() {
+        showNumber(firstValue);
     }
 }
