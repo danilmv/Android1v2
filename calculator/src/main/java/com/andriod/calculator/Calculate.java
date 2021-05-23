@@ -36,13 +36,10 @@ public class Calculate implements Serializable {
         this.textView = textView;
         this.textViewOperation = textViewOperation;
         this.textViewHistory = textViewHistory;
-        if (textViewHistory != null)
-            textViewHistory.setText(history.toString());
-        showOperation();
     }
 
     public void process(Action action) {
-        int MAX_LENGTH = 15;
+        int MAX_LENGTH = 30;
         if (length >= MAX_LENGTH) return;
 
 
@@ -194,5 +191,8 @@ public class Calculate implements Serializable {
 
     public void show() {
         showNumber(firstValue);
+        if (textViewHistory != null)
+            textViewHistory.setText(history.toString());
+        showOperation();
     }
 }
