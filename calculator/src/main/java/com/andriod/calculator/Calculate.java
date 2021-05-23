@@ -11,6 +11,7 @@ public class Calculate implements Serializable {
 
     private transient TextView textView;
     private transient TextView textViewOperation;
+    private transient TextView textViewHistory;
 
     private int length;
     private boolean hasDecimal = false;
@@ -22,15 +23,21 @@ public class Calculate implements Serializable {
 
     private boolean newNumber = true;
 
-    public Calculate(TextView textView, TextView textViewOperation) {
+    private final StringBuilder history;
+
+    public Calculate(TextView textView, TextView textViewOperation, TextView textViewHistory) {
         this.textView = textView;
         this.textViewOperation = textViewOperation;
+        this.textViewHistory = textViewHistory;
+        history = new StringBuilder();
     }
 
-    public void setTextView(TextView textView, TextView textViewOperation) {
+    public void setTextView(TextView textView, TextView textViewOperation, TextView textViewHistory) {
         this.textView = textView;
         this.textViewOperation = textViewOperation;
-
+        this.textViewHistory = textViewHistory;
+        if (textViewHistory != null)
+            textViewHistory.setText(history.toString());
         showOperation();
     }
 
@@ -140,6 +147,13 @@ public class Calculate implements Serializable {
                 break;
         }
         showNumber(firstValue);
+
+
+        String operation = String.format("%s\n%s\n", showOperation(), formatNumber(firstValue));
+        history.append(operation);
+        if (textViewHistory != null)
+            textViewHistory.append(operation);
+
     }
 
     private void setNegative() {

@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null)
-            calculate = new Calculate(findViewById(R.id.text_output), findViewById(R.id.text_output_operation));
+            calculate = new Calculate(findViewById(R.id.text_output), findViewById(R.id.text_output_operation), findViewById(R.id.text_output_history));
         else
             restoreCalculate(savedInstanceState);
 
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void restoreCalculate(@NonNull Bundle savedInstanceState) {
         calculate = (Calculate) savedInstanceState.getSerializable(KEY);
-        calculate.setTextView(findViewById(R.id.text_output), findViewById(R.id.text_output_operation));
+        calculate.setTextView(findViewById(R.id.text_output), findViewById(R.id.text_output_operation), findViewById(R.id.text_output_history));
         calculate.show();
     }
 }
