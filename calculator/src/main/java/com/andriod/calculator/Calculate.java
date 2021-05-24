@@ -1,11 +1,13 @@
 package com.andriod.calculator;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.Locale;
 
-public class Calculate implements Serializable {
+public class Calculate implements Serializable, Parcelable {
 
     private static final double MIN_FLOOR = 0.00001;
 
@@ -23,13 +25,12 @@ public class Calculate implements Serializable {
 
     private boolean newNumber = true;
 
-    private final StringBuilder history;
+    private final StringBuilder history = new StringBuilder();
 
     public Calculate(TextView textView, TextView textViewOperation, TextView textViewHistory) {
         this.textView = textView;
         this.textViewOperation = textViewOperation;
         this.textViewHistory = textViewHistory;
-        history = new StringBuilder();
     }
 
     public void setTextView(TextView textView, TextView textViewOperation, TextView textViewHistory) {
@@ -195,4 +196,43 @@ public class Calculate implements Serializable {
             textViewHistory.setText(history.toString());
         showOperation();
     }
+
+    protected Calculate(Parcel in) {
+
+        length = in.readInt();
+        hasDecimal = in.readByte() != 0;
+        operatorPressed = in.readByte() != 0;
+        firstValue = in.readDouble();
+        secondValue = in.readDouble();
+        prevValue = in.readDouble();
+        newNumber = in.readByte() != 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(length);
+        dest.writeByte((byte) (hasDecimal ? 1 : 0));
+        dest.writeByte((byte) (operatorPressed ? 1 : 0));
+        dest.writeDouble(firstValue);
+        dest.writeDouble(secondValue);
+        dest.writeDouble(prevValue);
+        dest.writeByte((byte) (newNumber ? 1 : 0));
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Calculate> CREATOR = new Creator<Calculate>() {
+        @Override
+        public Calculate createFromParcel(Parcel in) {
+            return new Calculate(in);
+        }
+
+        @Override
+        public Calculate[] newArray(int size) {
+            return new Calculate[size];
+        }
+    };
 }

@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             final int index = i;
             button = findViewById(buttonIds[i]);
             if (button != null) {
-                button.setOnClickListener((View.OnClickListener) v -> {
+                button.setOnClickListener(v -> {
                     calculate.process(actions[index]);
                 });
             }
@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putSerializable(KEY, calculate);
+//        outState.putSerializable(KEY, calculate);
+        outState.putParcelable(KEY, calculate);
         super.onSaveInstanceState(outState);
     }
 
@@ -63,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void restoreCalculate(@NonNull Bundle savedInstanceState) {
-        calculate = (Calculate) savedInstanceState.getSerializable(KEY);
+//        calculate = (Calculate) savedInstanceState.getSerializable(KEY);
+        calculate = savedInstanceState.getParcelable(KEY);
         calculate.setTextView(findViewById(R.id.text_output), findViewById(R.id.text_output_operation), findViewById(R.id.text_output_history));
         calculate.show();
     }
