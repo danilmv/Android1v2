@@ -5,10 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Calculate.ShowValuesListener {
 
-    private final String KEY = "CALC";
+    private final String KEY = "CALCULATOR_DATA_KEY";
 
     private final int[] buttonIds = {R.id.button_0, R.id.button_1, R.id.button_2, R.id.button_3,
             R.id.button_4, R.id.button_5, R.id.button_6, R.id.button_7, R.id.button_8, R.id.button_9,
@@ -26,15 +27,24 @@ public class MainActivity extends AppCompatActivity {
 
     private Calculate calculate;
 
+    private TextView textMain;
+    private TextView textOperation;
+    private TextView textHistory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState == null)
-            calculate = new Calculate(findViewById(R.id.text_output), findViewById(R.id.text_output_operation), findViewById(R.id.text_output_history));
-        else
+        textMain = findViewById(R.id.text_output);
+        textOperation = findViewById(R.id.text_output_operation);
+        textHistory = findViewById(R.id.text_output_history);
+
+        if (savedInstanceState == null) {
+            calculate = new Calculate(this);
+        } else {
             restoreCalculate(savedInstanceState);
+        }
 
         Button button;
         for (int i = 0; i < buttonIds.length; i++) {
@@ -48,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-//        outState.putSerializable(KEY, calculate);
         outState.putParcelable(KEY, calculate);
         super.onSaveInstanceState(outState);
     }
@@ -61,9 +70,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void restoreCalculate(@NonNull Bundle savedInstanceState) {
-//        calculate = (Calculate) savedInstanceState.getSerializable(KEY);
         calculate = savedInstanceState.getParcelable(KEY);
-        calculate.setTextView(findViewById(R.id.text_output), findViewById(R.id.text_output_operation), findViewById(R.id.text_output_history));
+        calculate.setListener(this);
         calculate.show();
+    }
+
+    @Override
+    public void setMainText(String value) {
+        textMain.setText(value);
+    }
+
+    @Override
+    public void appendMainText(String value) {
+        textMain.append(value);
+    }
+
+    @Override
+    public String getMainText() {
+        return textMain.getText().toString();
+    }
+
+    @Override
+    public void setOperationText(String value) {
+        textOperation.setText(value);
+    }
+
+    @Override
+    public void setHistoryText(String value) {
+        if (textHistory != null) textHistory.setText(value);
+    }
+
+    @Override
+    public void appendHistoryText(String value) {
+        if (textHistory != null) textHistory.append(value);
     }
 }

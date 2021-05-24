@@ -2,7 +2,6 @@ package com.andriod.calculator;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.Locale;
@@ -10,10 +9,6 @@ import java.util.Locale;
 public class Calculate implements Serializable, Parcelable {
 
     private static final double MIN_FLOOR = 0.00001;
-
-    private transient TextView textView;
-    private transient TextView textViewOperation;
-    private transient TextView textViewHistory;
 
     private int length;
     private boolean hasDecimal = false;
@@ -27,16 +22,23 @@ public class Calculate implements Serializable, Parcelable {
 
     private final StringBuilder history = new StringBuilder();
 
-    public Calculate(TextView textView, TextView textViewOperation, TextView textViewHistory) {
-        this.textView = textView;
-        this.textViewOperation = textViewOperation;
-        this.textViewHistory = textViewHistory;
+    public interface ShowValuesListener{
+        void setMainText(String value);
+        void appendMainText(String value);
+        String getMainText();
+        void setOperationText(String value);
+        void setHistoryText(String value);
+        void appendHistoryText(String value);
     }
 
-    public void setTextView(TextView textView, TextView textViewOperation, TextView textViewHistory) {
-        this.textView = textView;
-        this.textViewOperation = textViewOperation;
-        this.textViewHistory = textViewHistory;
+    private ShowValuesListener listener;
+
+    public Calculate(ShowValuesListener listener) {
+        this.listener = listener;
+    }
+
+    public void setListener(ShowValuesListener listener) {
+        this.listener = listener;
     }
 
     public void process(Action action) {
@@ -46,7 +48,7 @@ public class Calculate implements Serializable, Parcelable {
 
         switch (action) {
             case CANCEL:
-                textView.setText("");
+                listener.setMainText("");
                 hasDecimal = false;
                 length = 0;
                 if (operatorPressed) {
@@ -105,13 +107,13 @@ public class Calculate implements Serializable, Parcelable {
             default:
                 if (newNumber) {
                     length = 1;
-                    textView.setText(action.getValue());
+                    listener.setMainText(action.getValue());
                     newNumber = false;
                     if (!operatorPressed)
                         lastOperator = null;
                 } else {
                     length++;
-                    textView.append(action.getValue());
+                    listener.appendMainText(action.getValue());
                 }
         }
 
@@ -119,7 +121,7 @@ public class Calculate implements Serializable, Parcelable {
     }
 
     private double getInputValue() {
-        String string = textView.getText().toString();
+        String string = listener.getMainText();
         if (string.isEmpty()) return 0;
         return Double.parseDouble(string);
     }
@@ -154,8 +156,7 @@ public class Calculate implements Serializable, Parcelable {
 
         String operation = String.format("%s\n%s\n", showOperation(), formatNumber(firstValue));
         history.append(operation);
-        if (textViewHistory != null)
-            textViewHistory.append(operation);
+        listener.appendHistoryText(operation);
 
     }
 
@@ -184,7 +185,7 @@ public class Calculate implements Serializable, Parcelable {
     }
 
     private void showNumber(double number) {
-        textView.setText(formatNumber(number));
+        listener.setMainText(formatNumber(number));
     }
 
     private String showOperation() {
@@ -199,14 +200,13 @@ public class Calculate implements Serializable, Parcelable {
         else
             operation = "";
 
-        textViewOperation.setText(operation);
+        listener.setOperationText(operation);
         return operation;
     }
 
     public void show() {
         showNumber(firstValue);
-        if (textViewHistory != null)
-            textViewHistory.setText(history.toString());
+        listener.setHistoryText(history.toString());
         showOperation();
     }
 
