@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,9 +41,7 @@ public class MainActivity extends AppCompatActivity {
             final int index = i;
             button = findViewById(buttonIds[i]);
             if (button != null) {
-                button.setOnClickListener(v -> {
-                    calculate.process(actions[index]);
-                });
+                button.setOnClickListener(v -> calculate.process(actions[index]));
             }
         }
     }

@@ -85,6 +85,7 @@ public class Calculate implements Serializable, Parcelable {
                 break;
 
             case PERCENT:
+                getPercent();
                 break;
 
             case SIGN:
@@ -160,6 +161,18 @@ public class Calculate implements Serializable, Parcelable {
 
     private void setNegative() {
         showNumber(getInputValue() * -1);
+    }
+
+    private void getPercent() {
+        if (lastOperator == null)
+            return;
+
+        if (secondValue == 0)
+            secondValue = getInputValue();
+
+        secondValue = firstValue * secondValue / 100;
+
+        showNumber(secondValue);
     }
 
     private String formatNumber(double number) {
