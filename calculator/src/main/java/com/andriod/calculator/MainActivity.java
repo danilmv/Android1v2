@@ -2,10 +2,15 @@ package com.andriod.calculator;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.ToggleButton;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements Calculate.ShowValuesListener {
 
@@ -54,6 +59,13 @@ public class MainActivity extends AppCompatActivity implements Calculate.ShowVal
                 button.setOnClickListener(v -> calculate.process(actions[index]));
             }
         }
+
+        ToggleButton toggleButtonTheme = findViewById(R.id.toggle_button_theme_switch);
+        toggleButtonTheme.setChecked((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES);
+        toggleButtonTheme.setOnCheckedChangeListener(
+                (buttonView, isChecked) -> AppCompatDelegate.setDefaultNightMode(isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO));
+
+        updateTitle();
     }
 
     @Override
@@ -73,6 +85,15 @@ public class MainActivity extends AppCompatActivity implements Calculate.ShowVal
         calculate = savedInstanceState.getParcelable(KEY);
         calculate.setListener(this);
         calculate.show();
+    }
+
+    private void updateTitle() {
+        Configuration config = getResources().getConfiguration();
+        setTitle(String.format(Locale.getDefault(), "%s: %sdpi, %s, %s",
+                getTitle(),
+                config.densityDpi,
+                config.orientation == Configuration.ORIENTATION_PORTRAIT ? "portrait" : "landscape",
+                (config.screenHeightDp / 4 * 3 >= config.screenWidthDp - 1) ? "long" : "notlong"));
     }
 
     @Override
