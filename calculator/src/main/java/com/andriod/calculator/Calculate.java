@@ -22,12 +22,17 @@ public class Calculate implements Serializable, Parcelable {
 
     private final StringBuilder history = new StringBuilder();
 
-    public interface ShowValuesListener{
+    public interface ShowValuesListener {
         void setMainText(String value);
+
         void appendMainText(String value);
+
         String getMainText();
+
         void setOperationText(String value);
+
         void setHistoryText(String value);
+
         void appendHistoryText(String value);
     }
 
@@ -43,8 +48,6 @@ public class Calculate implements Serializable, Parcelable {
 
     public void process(Action action) {
         int MAX_LENGTH = 30;
-        if (length >= MAX_LENGTH) return;
-
 
         switch (action) {
             case CANCEL:
@@ -69,8 +72,7 @@ public class Calculate implements Serializable, Parcelable {
             case SUBTRACT:
             case MULTIPLY:
             case DIVIDE:
-                if (!newNumber)
-                    showCalculation();
+                if (!newNumber) showCalculation();
 
                 operatorPressed = true;
                 lastOperator = action;
@@ -95,8 +97,7 @@ public class Calculate implements Serializable, Parcelable {
                 break;
 
             case ZERO:
-                if (newNumber)
-                    break;
+                if (newNumber) break;
 
             case DECIMAL:
                 if (action == Action.DECIMAL) {
@@ -112,6 +113,7 @@ public class Calculate implements Serializable, Parcelable {
                     if (!operatorPressed)
                         lastOperator = null;
                 } else {
+                    if (length >= MAX_LENGTH) return;
                     length++;
                     listener.appendMainText(action.getValue());
                 }
@@ -131,8 +133,7 @@ public class Calculate implements Serializable, Parcelable {
             showOperation();
             return;
         }
-        if (secondValue == 0)
-            secondValue = getInputValue();
+        if (secondValue == 0) secondValue = getInputValue();
 
         operatorPressed = false;
 
@@ -165,11 +166,9 @@ public class Calculate implements Serializable, Parcelable {
     }
 
     private void getPercent() {
-        if (lastOperator == null)
-            return;
+        if (lastOperator == null) return;
 
-        if (secondValue == 0)
-            secondValue = getInputValue();
+        if (secondValue == 0) secondValue = getInputValue();
 
         secondValue = firstValue * secondValue / 100;
 
@@ -178,10 +177,11 @@ public class Calculate implements Serializable, Parcelable {
 
     private String formatNumber(double number) {
 
-        if (number - Math.floor(number) < MIN_FLOOR)
+        if (number - Math.floor(number) < MIN_FLOOR) {
             return String.format(Locale.getDefault(), "%.0f", number);
-        else
+        } else {
             return String.format(Locale.getDefault(), "%s", number);
+        }
     }
 
     private void showNumber(double number) {
@@ -190,15 +190,15 @@ public class Calculate implements Serializable, Parcelable {
 
     private String showOperation() {
         String operation;
-        if (lastOperator != null)
-            if (operatorPressed)
+        if (lastOperator != null) {
+            if (operatorPressed) {
                 operation = String.format(Locale.getDefault(), "%s %s",
                         formatNumber(prevValue), lastOperator.getValue());
-            else
+            } else {
                 operation = String.format(Locale.getDefault(), "%s %s %s = ",
                         formatNumber(prevValue), lastOperator.getValue(), formatNumber(secondValue));
-        else
-            operation = "";
+            }
+        } else operation = "";
 
         listener.setOperationText(operation);
         return operation;

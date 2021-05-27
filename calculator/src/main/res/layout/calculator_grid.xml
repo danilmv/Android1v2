@@ -3,206 +3,116 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnCount="4"
-    android:background="@color/teal_700">
+    android:background="?attr/colorPrimary"
+    android:columnCount="4">
 
     <TextView
         android:id="@+id/text_output_operation"
-        android:layout_height="@dimen/output_height"
-        android:layout_columnSpan="4"
-        android:layout_marginStart="@dimen/buttons_margin_horizontal"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
-        android:singleLine="true"
+        style="@style/output_style"
         android:textSize="@dimen/text_size_operation"
-        android:layout_gravity="end"
-        android:maxLength="30"
         tools:text="12345678" />
+
     <TextView
         android:id="@+id/text_output"
-        android:layout_height="@dimen/output_height"
-        android:layout_columnSpan="4"
-        android:layout_marginStart="@dimen/buttons_margin_horizontal"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
-        android:singleLine="true"
-        android:maxLength="30"
+        style="@style/output_style"
         android:textSize="@dimen/text_size_number"
-        android:layout_gravity="end"
         tools:text="12345678" />
-    <Button
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_c"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
-        android:layout_marginStart="@dimen/buttons_margin_horizontal"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="1"
+        style="@style/button_style"
         android:text="@string/cancel" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_sign"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="1"
+        style="@style/button_style"
         android:text="@string/sign" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_percent"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="1"
+        style="@style/button_style"
         android:text="@string/percent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_divide"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="1"
+        style="@style/button_style.operand"
         android:text="@string/divide" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_7"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="1"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
-        android:layout_marginStart="@dimen/buttons_margin_horizontal"
+        style="@style/button_style.number"
         android:text="@string/button_7" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_8"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="1"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
+        style="@style/button_style.number"
         android:text="@string/button_8" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_9"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="1"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
+        style="@style/button_style.number"
         android:text="@string/button_9" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_multiply"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="1"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
+        style="@style/button_style.operand"
         android:text="@string/multiply" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_4"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="1"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
-        android:layout_marginStart="@dimen/buttons_margin_horizontal"
+        style="@style/button_style.number"
         android:text="@string/button_4" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_5"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="1"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
+        style="@style/button_style.number"
         android:text="@string/button_5" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_6"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="1"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
+        style="@style/button_style.number"
         android:text="@string/button_6" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_subtract"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="1"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
+        style="@style/button_style.operand"
         android:text="@string/subtract" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_1"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="1"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
-        android:layout_marginStart="@dimen/buttons_margin_horizontal"
+        style="@style/button_style.number"
         android:text="@string/button_1" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_2"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="1"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
+        style="@style/button_style.number"
         android:text="@string/button_2" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_3"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="1"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
+        style="@style/button_style.number"
         android:text="@string/button_3" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_add"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="1"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
+        style="@style/button_style.operand"
         android:text="@string/add" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_0"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="2"
-        android:layout_height="@dimen/button_height"
+        style="@style/button_style.number"
         android:layout_columnSpan="2"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
-        android:layout_marginStart="@dimen/buttons_margin_horizontal"
+        android:width="@dimen/button_wide_width_grid"
         android:text="@string/button_0" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_point"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="1"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
+        style="@style/button_style.number"
         android:text="@string/point" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_equal"
-        android:layout_height="@dimen/button_height"
-        android:layout_gravity="fill"
-        android:layout_columnWeight="1"
-        android:layout_marginVertical="@dimen/buttons_margin_vertical"
-        android:layout_marginEnd="@dimen/buttons_margin_horizontal"
+        style="@style/button_style.operand"
         android:text="@string/equal" />
 
 </GridLayout>

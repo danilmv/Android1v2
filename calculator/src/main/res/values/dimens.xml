@@ -3,9 +3,11 @@
     <dimen name="buttons_margin_horizontal">5dp</dimen>
     <dimen name="buttons_margin_vertical">2dp</dimen>
     <dimen name="button_width">60dp</dimen>
-    <dimen name="button_wide_width_grid">125dp</dimen>
+    <dimen name="button_wide_width_grid">180dp</dimen>
     <dimen name="button_height">40dp</dimen>
     <dimen name="output_height">25dp</dimen>
     <dimen name="text_size_operation">10sp</dimen>
     <dimen name="text_size_number">20sp</dimen>
+    <dimen name="buttons_corner_radius">20dp</dimen>
+    <dimen name="toggle_button_size">30dp</dimen>
 </resources>
