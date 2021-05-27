@@ -11,3 +11,7 @@
 ### Preview
 <img src="printscreens/lesson3.png" width="32%"> 
 <img src="printscreens/lesson3_landscape.png" width="32%"> 
+
+## Lesson4: Resources: calculator dark-mode
+### Preview
+<img src="printscreens/lesson4.png" width="32%">

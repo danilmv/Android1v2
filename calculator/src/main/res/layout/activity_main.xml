@@ -11,6 +11,17 @@
         android:scaleType="center"
         app:srcCompat="@drawable/desk" />
 
+    <ToggleButton
+        android:id="@+id/toggle_button_theme_switch"
+        android:layout_width="@dimen/toggle_button_size"
+        android:layout_height="@dimen/toggle_button_size"
+        android:background="@drawable/theme_switch"
+        android:focusableInTouchMode="false"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="wrap_content"

@@ -19,4 +19,5 @@
     <string name="button_0">0</string>
     <string name="point">,</string>
     <string name="equal">=</string>
+    <string name="device_characteristics">=</string>
 </resources>
