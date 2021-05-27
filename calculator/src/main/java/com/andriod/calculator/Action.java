@@ -20,8 +20,7 @@ public enum Action implements Serializable {
         this.isOperator = isOperator;
     }
     Action(String value) {
-        this.value = value;
-        this.isOperator = false;
+        this(value, false);
     }
 
     public String getValue() {
