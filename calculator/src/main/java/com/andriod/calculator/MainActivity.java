@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -14,10 +15,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements Calculate.ShowValuesListener {
 
+    private static final String TAG = "@MainActivity@";
     private final String KEY = "CALCULATOR_DATA_KEY";
 
     private final int[] buttonIds = {R.id.button_0, R.id.button_1, R.id.button_2, R.id.button_3,
@@ -69,7 +74,19 @@ public class MainActivity extends AppCompatActivity implements Calculate.ShowVal
         toggleButtonTheme.setOnCheckedChangeListener(
                 (buttonView, isChecked) -> AppCompatDelegate.setDefaultNightMode(isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO));
 
-        updateTitle();
+        Intent fromIntent = getIntent();
+        String message = null;
+        if (fromIntent != null) {
+            Uri data = fromIntent.getData();
+            if (data != null) {
+                String value = data.getPath().substring(1);
+                message = String.format("received data to process: %s", value);
+                Log.d(TAG, message);
+                calculate.parseString(value);
+            }
+        }
+
+        updateTitle(message);
     }
 
     @Override
@@ -91,13 +108,17 @@ public class MainActivity extends AppCompatActivity implements Calculate.ShowVal
         calculate.show();
     }
 
-    private void updateTitle() {
-        Configuration config = getResources().getConfiguration();
-        setTitle(String.format(Locale.getDefault(), "%s: %sdpi, %s, %s",
-                getTitle(),
-                config.densityDpi,
-                config.orientation == Configuration.ORIENTATION_PORTRAIT ? "portrait" : "landscape",
-                (config.screenHeightDp / 4 * 3 >= config.screenWidthDp - 1) ? "long" : "notlong"));
+    private void updateTitle(String message) {
+        if (message == null) {
+            Configuration config = getResources().getConfiguration();
+            setTitle(String.format(Locale.getDefault(), "%s: %sdpi, %s, %s",
+                    getTitle(),
+                    config.densityDpi,
+                    config.orientation == Configuration.ORIENTATION_PORTRAIT ? "portrait" : "landscape",
+                    (config.screenHeightDp / 4 * 3 >= config.screenWidthDp - 1) ? "long" : "notlong"));
+        } else {
+            setTitle(String.format("%s: %s", getTitle(), message));
+        }
     }
 
     @Override

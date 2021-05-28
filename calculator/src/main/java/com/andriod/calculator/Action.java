@@ -1,6 +1,8 @@
 package com.andriod.calculator;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public enum Action implements Serializable {
     ZERO("0"), ONE("1"), TWO("2"), THREE("3"), FOUR("4"),
@@ -15,10 +17,19 @@ public enum Action implements Serializable {
     private final String value;
     private final boolean isOperator;
 
+    private static final Map<String, Action> actions = new HashMap<String, Action>();
+
+    static {
+        for (Action a : values()) {
+            actions.put(a.getValue(), a);
+        }
+    }
+
     Action(String value, boolean isOperator) {
         this.value = value;
         this.isOperator = isOperator;
     }
+
     Action(String value) {
         this(value, false);
     }
@@ -27,7 +38,16 @@ public enum Action implements Serializable {
         return value;
     }
 
-    public boolean isOperator(){
+    public boolean isOperator() {
         return isOperator;
+    }
+
+    public static Action getAction(char value) {
+        return actions.get(String.valueOf(value));
+    }
+
+    @Override
+    public String toString() {
+        return value;
     }
 }
