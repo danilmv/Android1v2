@@ -1,23 +1,24 @@
 <resources>
     <string name="app_name">calculator</string>
-    <string name="cancel">C</string>
-    <string name="sign">+/-</string>
-    <string name="percent">%</string>
-    <string name="divide">/</string>
-    <string name="button_7">7</string>
-    <string name="button_8">8</string>
-    <string name="button_9">9</string>
-    <string name="multiply">*</string>
-    <string name="button_4">4</string>
-    <string name="button_5">5</string>
-    <string name="button_6">6</string>
-    <string name="subtract">-</string>
-    <string name="button_1">1</string>
-    <string name="button_2">2</string>
-    <string name="button_3">3</string>
-    <string name="add">+</string>
-    <string name="button_0">0</string>
-    <string name="point">,</string>
-    <string name="equal">=</string>
-    <string name="device_characteristics">=</string>
+    <string name="cancel" translatable="false">C</string>
+    <string name="sign" translatable="false">+/-</string>
+    <string name="percent" translatable="false">%</string>
+    <string name="divide" translatable="false">/</string>
+    <string name="button_7" translatable="false">7</string>
+    <string name="button_8" translatable="false">8</string>
+    <string name="button_9" translatable="false">9</string>
+    <string name="multiply" translatable="false">*</string>
+    <string name="button_4" translatable="false">4</string>
+    <string name="button_5" translatable="false">5</string>
+    <string name="button_6" translatable="false">6</string>
+    <string name="subtract" translatable="false">-</string>
+    <string name="button_1" translatable="false">1</string>
+    <string name="button_2" translatable="false">2</string>
+    <string name="button_3" translatable="false">3</string>
+    <string name="add" translatable="false">+</string>
+    <string name="button_0" translatable="false">0</string>
+    <string name="point" translatable="false">,</string>
+    <string name="equal" translatable="false">=</string>
+    <string name="device_characteristics" translatable="false">=</string>
+    <string name="settings">Settings</string>
 </resources>

@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -124,5 +127,20 @@ public class MainActivity extends AppCompatActivity implements Calculate.ShowVal
     @Override
     public void appendHistoryText(String value) {
         if (textHistory != null) textHistory.append(value);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_settings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menu_item_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
