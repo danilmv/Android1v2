@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="linear_button_style">
+        <!--        <item name="android:layout_width">@dimen/button_width</item>-->
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/buttons_margin_horizontal</item>
+        <!--        <item name="android:layout_marginHorizontal">@dimen/buttons_margin_horizontal</item>-->
+        <!--        <item name="android:layout_marginVertical">@dimen/buttons_margin_vertical</item>-->
+    </style>
+
+    <style name="grid_button_style">
+        <!--        <item name="android:layout_width">@dimen/button_width</item>-->
+        <!--        <item name="android:layout_width">0dp</item>-->
+        <item name="android:layout_gravity">fill</item>
+        <!--        <item name="android:gravity">fill</item>-->
+        <item name="android:layout_columnWeight">1</item>
+        <!--        <item name="android:layout_height">wrap_content</item>-->
+        <!--        <item name="android:layout_marginVertical">@dimen/buttons_margin_vertical</item>-->
+        <!--        <item name="android:layout_marginEnd">@dimen/buttons_margin_horizontal</item>-->
+        <item name="android:layout_margin">@dimen/buttons_margin_horizontal</item>
+    </style>
+
+    <style name="table_button_style">
+        <!--        <item name="android:layout_width">@dimen/button_width</item>-->
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/buttons_margin_horizontal</item>
+<!--        <item name="android:layout_marginHorizontal">@dimen/buttons_margin_horizontal</item>-->
+<!--        <item name="android:layout_marginVertical">@dimen/buttons_margin_vertical</item>-->
+    </style>
+
+    <style name="constraint_button_style">
+        <item name="android:layout_width">wrap_content</item>
+        <!--        <item name="android:layout_width">@dimen/button_width</item>-->
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/buttons_margin_horizontal</item>
+<!--        <item name="android:layout_marginHorizontal">@dimen/buttons_margin_horizontal</item>-->
+<!--        <item name="android:layout_marginVertical">@dimen/buttons_margin_vertical</item>-->
+    </style>
+</resources>
