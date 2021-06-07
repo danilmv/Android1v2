@@ -2,6 +2,7 @@ package com.andriod.calculator;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.util.Locale;
@@ -9,6 +10,7 @@ import java.util.Locale;
 public class Calculate implements Serializable, Parcelable {
 
     private static final double MIN_FLOOR = 0.00001;
+    private static final String TAG = "@Calculate@";
 
     private int length;
     private boolean hasDecimal = false;
@@ -48,6 +50,8 @@ public class Calculate implements Serializable, Parcelable {
 
     public void process(Action action) {
         int MAX_LENGTH = 30;
+
+        if (action == null) return;
 
         switch (action) {
             case CANCEL:
@@ -248,4 +252,15 @@ public class Calculate implements Serializable, Parcelable {
             return new Calculate[size];
         }
     };
+
+    public void parseString(String data) {
+        if (data == null) return;
+        char[] commands = data.toCharArray();
+        for (char command : commands) {
+            Action action = Action.getAction(command);
+            Log.d(TAG, String.format("processing: %c >> %s", command, action));
+            process(action);
+        }
+        process(Action.EQUAL);
+    }
 }

@@ -15,3 +15,9 @@
 ## Lesson4: Resources: calculator dark-mode
 ### Preview
 <img src="printscreens/lesson4.png" width="32%">
+
+## Lesson5: Intents: start calculator and pass data to process
+### Preview
+<img src="printscreens/lesson5_call_calculator.png" width="32%"> 
+<img src="printscreens/lesson5_receive_data.png" width="32%">
+

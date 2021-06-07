@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">калькулятор</string>
+    <string name="settings">настройки</string>
+    <string name="settings_theme">Тема:</string>
+</resources>
